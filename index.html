@@ -2,19 +2,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>IPhone Calculator</title>
+<title>iPhone Style Calculator</title>
 
 <style>
 body {
     margin: 0;
     background: #ffffff;
     display: flex;
+    flex-direction: column; /* allow title on top */
     justify-content: center;
     align-items: center;
     height: 100vh;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+/* Title */
+.title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+/* Calculator body */
 .calculator {
     width: 320px;
     background: #000;
@@ -24,6 +34,7 @@ body {
     box-shadow: 0 15px 35px rgba(0,0,0,0.2);
 }
 
+/* Display */
 .display {
     color: white;
     font-size: 55px;
@@ -34,6 +45,7 @@ body {
     overflow-x: auto;
 }
 
+/* Grid buttons */
 .buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -87,7 +99,7 @@ button {
 
 <body>
 
-<h1>CALCULATOR NI JAHMES</h1>
+<h1 class="title">CALCULATOR NI JAHMES</h1>
 
 <div class="calculator">
     <div class="display" id="display">0</div>
@@ -127,18 +139,15 @@ function append(value) {
     let current = display.innerText;
     let lastChar = current.slice(-1);
 
-    // Replace 0 if number pressed
     if (current === "0" && !operators.includes(value) && value !== ".") {
         display.innerText = value;
         return;
     }
 
-    // Prevent starting with operator
     if (current === "0" && operators.includes(value)) {
         return;
     }
 
-    // Prevent multiple operators in a row
     if (operators.includes(lastChar) && operators.includes(value)) {
         return;
     }
